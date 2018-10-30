@@ -25,7 +25,7 @@ export class GameCanvas {
 
     render() {
         this.renderBackGround();
-       // this.renderGrid();
+        //this.renderGrid();
         this.renderGameObjects();
     }
 

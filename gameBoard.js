@@ -5,7 +5,7 @@ import { Size } from "./size.js";
 export class GameBoard {
     constructor(position, size, rowByColumn, colour, border) {
         this.position = position;
-        this.size = new Size(size.width - 2, size.height - 2);
+        this.size = new Size(size.width, size.height );
         this.colour = colour;
         this.border = border;
         this.grid = new Grid(position, this.size, rowByColumn, 1);

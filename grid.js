@@ -14,10 +14,10 @@ export class Grid {
 
     calculateBlockSize() {
         let totalWidthAfterReducingSpacing = this.size.width - (this.blockSpacing*(this.rowByColumn.column - 1))
-        let blockWidth = totalWidthAfterReducingSpacing / this.rowByColumn.column;
+        let blockWidth = Math.round(totalWidthAfterReducingSpacing / this.rowByColumn.column);
 
         let totalHeightAfterReducingSpacing = this.size.height - (this.blockSpacing*(this.rowByColumn.row - 1))
-        let blockHeight = totalHeightAfterReducingSpacing / this.rowByColumn.row;
+        let blockHeight = Math.round(totalHeightAfterReducingSpacing / this.rowByColumn.row);
 
         return new Size(blockWidth, blockHeight);
     }

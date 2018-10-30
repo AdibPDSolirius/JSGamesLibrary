@@ -11,7 +11,8 @@ var gameBoardSize = new Size(1000, 1000);
 var gameBoardRowByColumn = new RowColumn(60, 60);
 var gameBoardPosition = new Position(100, 100);
 var gameBoardColour = 'black';
-var gameBoard = new GameBoard(gameBoardPosition, gameBoardSize, gameBoardRowByColumn, gameBoardColour);
+var gameBoardBorder = '0px solid';
+var gameBoard = new GameBoard(gameBoardPosition, gameBoardSize, gameBoardRowByColumn, gameBoardColour, gameBoardBorder);
 
 //Initialise game objects
 var snake = new GameObject('yellow');
