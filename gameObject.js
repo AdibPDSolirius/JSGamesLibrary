@@ -1,6 +1,5 @@
 export class GameObject {
-    constructor(position, colour) {
-        this.position = position;
+    constructor(colour) {
         this.colour = colour;
     }
 }

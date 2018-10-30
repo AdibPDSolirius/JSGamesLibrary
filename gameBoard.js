@@ -7,12 +7,8 @@ export class GameBoard {
         this.position = position;
         this.size = size;
         this.colour = colour;
-        this.grid = new Grid(position, size, rowByColumn, 10);
+        this.grid = new Grid(position, size, rowByColumn, 1);
         this.gameObjects = [];
-    }
-
-    addGameObject(gameOject) {
-        this.gameObjects.push(gameOject);
     }
 
     addGameObject(gameObject, position) {
