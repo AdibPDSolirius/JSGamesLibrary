@@ -18,6 +18,7 @@ export class Grid {
 
         let totalHeightAfterReducingSpacing = this.size.height - (this.blockSpacing*(this.rowByColumn.row - 1))
         let blockHeight = totalHeightAfterReducingSpacing / this.rowByColumn.row;
+
         return new Size(blockWidth, blockHeight);
     }
 

@@ -3,10 +3,11 @@ import { Grid } from "./grid.js";
 import { Size } from "./size.js";
 
 export class GameBoard {
-    constructor(position, size, rowByColumn, colour) {
+    constructor(position, size, rowByColumn, colour, border) {
         this.position = position;
-        this.size = size;
+        this.size = new Size(size.width-1, size.height-1);
         this.colour = colour;
+        this.border = border;
         this.grid = new Grid(position, size, rowByColumn, 1);
         this.gameObjects = [];
     }

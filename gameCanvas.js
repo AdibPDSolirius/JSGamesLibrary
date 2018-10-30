@@ -9,7 +9,7 @@ export class GameCanvas {
     createCanvasInDOM(gameBoard, id) {
         var canvas = document.createElement('canvas');
         canvas.id = id;
-        this.setCanvasProperties(canvas, gameBoard.position.x, gameBoard.position.y, gameBoard.size.width, gameBoard.size.height, '1px solid');
+        this.setCanvasProperties(canvas, gameBoard.position.x, gameBoard.position.y, gameBoard.size.width, gameBoard.size.height, gameBoard.border);
         document.body.appendChild(canvas);
     }
 
@@ -25,7 +25,7 @@ export class GameCanvas {
     renderGameBoard(gameBoard) {
         this.renderBackGround(gameBoard);
         this.renderGrid(gameBoard);
-        this.renderGameObjectsIn(gameBoard);
+        //this.renderGameObjectsIn(gameBoard);
     }
 
     renderGrid(gameBoard) {
@@ -36,7 +36,7 @@ export class GameCanvas {
                 let obj = {
                     position: curPosition,
                     size: grid.blockSize,
-                    colour: 'red'
+                    colour: 'white'
                 }
                 var ctx = this.getCanvasElement().getContext('2d');
                 ctx.fillStyle = obj.colour;
@@ -57,15 +57,10 @@ export class GameCanvas {
         }
     }
 
-    // renderGameObject(gameObject) {
-    //     this.fillCanvasSpace(gameObject);
-    // }
-
     renderGameObject(gameObject, size) {
         var ctx = this.getCanvasElement().getContext('2d');
         ctx.fillStyle = gameObject.colour;
         for(let pos of gameObject.position) {
-            console.log(pos);
             ctx.fillRect(pos.x, pos.y, size.width , size.height);
         }
        // this.fillCanvasSpace(gameObject);
@@ -74,7 +69,7 @@ export class GameCanvas {
     fillCanvasSpace(objectToRender) {
         var ctx = this.getCanvasElement().getContext('2d');
         ctx.fillStyle = objectToRender.colour;
-        ctx.fillRect(0, 0, objectToRender.size.width , objectToRender.size.height);
+        ctx.fillRect(0, 0, objectToRender.size.width, objectToRender.size.height);
     }
 
     getCanvasElement() {
