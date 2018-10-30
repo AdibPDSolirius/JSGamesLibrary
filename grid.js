@@ -23,9 +23,9 @@ export class Grid {
 
     createGridOfPositions() {
         let gridArray = [];
-        let currrentYPosition = this.position.y;
+        let currrentYPosition = 0;
         for(let curRow = 0; curRow < this.rowByColumn.row; curRow++) {
-            let currentXPosition = this.position.x;
+            let currentXPosition = 0;
             let curRowPositions = [];
             for(let curColumn = 0; curColumn < this.rowByColumn.column; curColumn++) {
                 curRowPositions.push(new Position(currentXPosition, currrentYPosition));

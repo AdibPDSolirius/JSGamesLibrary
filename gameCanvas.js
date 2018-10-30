@@ -2,18 +2,21 @@ import { Position } from './position.js';
 
 export class GameCanvas {
     constructor(gameBoard) {
-        this.id = 'gameBoard';
+        this.id = 'gameCanvas';
         this.createCanvasInDOM(gameBoard, this.id);
     }
 
     createCanvasInDOM(gameBoard, id) {
         var canvas = document.createElement('canvas');
         canvas.id = id;
-        this.setCanvasProperties(canvas, gameBoard.size.width, gameBoard.size.height, '0px solid');
+        this.setCanvasProperties(canvas, gameBoard.position.x, gameBoard.position.y, gameBoard.size.width, gameBoard.size.height, '1px solid');
         document.body.appendChild(canvas);
     }
 
-    setCanvasProperties(canvas, width, height, border) {
+    setCanvasProperties(canvas, x, y, width, height, border) {
+        canvas.style.left = x;
+        canvas.style.top = y;
+        canvas.style.position = 'absolute';
         canvas.width = width;
         canvas.height = height
         canvas.style.border = border;
@@ -21,13 +24,12 @@ export class GameCanvas {
 
     renderGameBoard(gameBoard) {
         this.renderBackGround(gameBoard);
-        //this.renderGrid(gameBoard);
+        this.renderGrid(gameBoard);
         this.renderGameObjectsIn(gameBoard);
     }
 
     renderGrid(gameBoard) {
         let grid = gameBoard.grid;
-        console.log(grid);
         for(let row = 0; row < grid.rowByColumn.row; row++) {
             for(let column = 0; column < grid.rowByColumn.column; column++) {
                 let curPosition = grid.grid[row][column];
@@ -36,7 +38,9 @@ export class GameCanvas {
                     size: grid.blockSize,
                     colour: 'red'
                 }
-                this.fillCanvasSpace(obj)
+                var ctx = this.getCanvasElement().getContext('2d');
+                ctx.fillStyle = obj.colour;
+                ctx.fillRect(obj.position.x, obj.position.y, obj.size.width , obj.size.height);
             }
         }
     } 
@@ -70,7 +74,7 @@ export class GameCanvas {
     fillCanvasSpace(objectToRender) {
         var ctx = this.getCanvasElement().getContext('2d');
         ctx.fillStyle = objectToRender.colour;
-        ctx.fillRect(objectToRender.position.x, objectToRender.position.y, objectToRender.size.width , objectToRender.size.height);
+        ctx.fillRect(0, 0, objectToRender.size.width , objectToRender.size.height);
     }
 
     getCanvasElement() {
