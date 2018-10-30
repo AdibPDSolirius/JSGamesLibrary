@@ -30,7 +30,7 @@ var playerPositions = [
 ]
 
 //Add game objects to gameboard with positions
-gameBoard.addGameObject(player, playerPositions);
+gameBoard.addGameObject(player, new Position(30, 30));
 
 //Initialise game canvas with gameboard
 var gameCanvas = new GameCanvas(gameBoard);

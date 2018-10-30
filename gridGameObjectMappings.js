@@ -9,7 +9,7 @@ export class GridGameObjectMappings {
     }
 
     getMapping(gameObject) {
-        return this.mappings[gameObject.name][0];
+        return this.mappings[gameObject.name];
     }
     
 }
