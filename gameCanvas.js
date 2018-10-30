@@ -2,6 +2,7 @@ import { Position } from './position.js';
 
 export class GameCanvas {
     constructor(gameBoard) {
+        this.gameBoard = gameBoard;
         this.id = 'gameCanvas';
         this.createCanvasInDOM(gameBoard, this.id);
     }
@@ -9,67 +10,51 @@ export class GameCanvas {
     createCanvasInDOM(gameBoard, id) {
         var canvas = document.createElement('canvas');
         canvas.id = id;
-        this.setCanvasProperties(canvas, gameBoard.position.x, gameBoard.position.y, gameBoard.size.width, gameBoard.size.height, gameBoard.border);
+        this.setCanvasProperties(canvas, gameBoard.position, gameBoard.size, gameBoard.border);
         document.body.appendChild(canvas);
     }
 
-    setCanvasProperties(canvas, x, y, width, height, border) {
-        canvas.style.left = x;
-        canvas.style.top = y;
+    setCanvasProperties(canvas, position, size, border) {
+        canvas.style.left = position.x;
+        canvas.style.top =  position.y;
         canvas.style.position = 'absolute';
-        canvas.width = width;
-        canvas.height = height
+        canvas.width = size.width;
+        canvas.height = size.height
         canvas.style.border = border;
     }
 
-    renderGameBoard(gameBoard) {
-        this.renderBackGround(gameBoard);
-        this.renderGrid(gameBoard);
-        //this.renderGameObjectsIn(gameBoard);
+    render() {
+        this.renderBackGround();
+       // this.renderGrid();
+        this.renderGameObjects();
     }
 
-    renderGrid(gameBoard) {
-        let grid = gameBoard.grid;
+    renderBackGround() {
+        this.fillCanvasSpace(new Position(0,0), this.gameBoard.size, this.gameBoard.colour);
+    }
+
+    renderGrid() {
+        let grid = this.gameBoard.grid;
         for(let row = 0; row < grid.rowByColumn.row; row++) {
             for(let column = 0; column < grid.rowByColumn.column; column++) {
                 let curPosition = grid.grid[row][column];
-                let obj = {
-                    position: curPosition,
-                    size: grid.blockSize,
-                    colour: 'white'
-                }
-                var ctx = this.getCanvasElement().getContext('2d');
-                ctx.fillStyle = obj.colour;
-                ctx.fillRect(obj.position.x, obj.position.y, obj.size.width , obj.size.height);
+                this.fillCanvasSpace(curPosition, grid.blockSize, 'red');
             }
         }
     } 
 
-    renderBackGround(gameBoard) {
-        this.fillCanvasSpace(gameBoard);
-    }
-
-    renderGameObjectsIn(gameBoard) {
-        for(let curGameObject of gameBoard.gameObjects) {
-            var newObj = curGameObject;
-            newObj.position = gameBoard.getGameObjectPosition(curGameObject);
-            this.renderGameObject(newObj, gameBoard.grid.blockSize);
+    renderGameObjects() {
+        for(let curGameObject of this.gameBoard.gameObjects) {
+            for(let curPosition of this.gameBoard.getPositionsOf(curGameObject)) {
+                this.fillCanvasSpace(curPosition, this.gameBoard.grid.blockSize, curGameObject.colour);
+            }
         }
     }
 
-    renderGameObject(gameObject, size) {
+    fillCanvasSpace(position, size, colour) {
         var ctx = this.getCanvasElement().getContext('2d');
-        ctx.fillStyle = gameObject.colour;
-        for(let pos of gameObject.position) {
-            ctx.fillRect(pos.x, pos.y, size.width , size.height);
-        }
-       // this.fillCanvasSpace(gameObject);
-    }
-
-    fillCanvasSpace(objectToRender) {
-        var ctx = this.getCanvasElement().getContext('2d');
-        ctx.fillStyle = objectToRender.colour;
-        ctx.fillRect(0, 0, objectToRender.size.width, objectToRender.size.height);
+        ctx.fillStyle = colour;
+        ctx.fillRect(position.x, position.y, size.width, size.height);
     }
 
     getCanvasElement() {

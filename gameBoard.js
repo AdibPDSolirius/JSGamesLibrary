@@ -5,10 +5,10 @@ import { Size } from "./size.js";
 export class GameBoard {
     constructor(position, size, rowByColumn, colour, border) {
         this.position = position;
-        this.size = new Size(size.width-1, size.height-1);
+        this.size = new Size(size.width - 2, size.height - 2);
         this.colour = colour;
         this.border = border;
-        this.grid = new Grid(position, size, rowByColumn, 1);
+        this.grid = new Grid(position, this.size, rowByColumn, 1);
         this.gameObjects = [];
     }
 
@@ -19,12 +19,12 @@ export class GameBoard {
         
     }
 
-    getGameObjectPosition(gameOject) {
-        var position = [];
+    getPositionsOf(gameOject) {
+        var positions = [];
         for(let curPosition of gameOject.position) {
-            position.push(this.grid.getScreenPosition(curPosition));
+            positions.push(this.grid.getScreenPosition(curPosition));
         }
-        return position;
+        return positions;
     }
 
     // setPlayerStartingPosition() {
