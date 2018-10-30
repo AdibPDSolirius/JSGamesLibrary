@@ -22,14 +22,14 @@ export class GameCanvas {
     renderGameBoard(gameBoard) {
         this.renderBackGround(gameBoard);
         this.renderGrid(gameBoard);
-        // this.renderGameObjectsIn(gameBoard);
+        this.renderGameObjectsIn(gameBoard);
     }
 
     renderGrid(gameBoard) {
         let grid = gameBoard.grid;
         console.log(grid);
-        for(let row = 0; row < grid.rowByColumn.width; row++) {
-            for(let column = 0; column < grid.rowByColumn.height; column++) {
+        for(let row = 0; row < grid.rowByColumn.row; row++) {
+            for(let column = 0; column < grid.rowByColumn.column; column++) {
                 let curPosition = grid.grid[row][column];
                 let obj = {
                     position: curPosition,
@@ -49,12 +49,21 @@ export class GameCanvas {
         for(let curGameObject of gameBoard.gameObjects) {
             var newObj = curGameObject;
             newObj.position = gameBoard.getGameObjectPosition(curGameObject);
-            this.renderGameObject(newObj);
+            this.renderGameObject(newObj, gameBoard.grid.blockSize);
         }
     }
 
-    renderGameObject(gameObject) {
-        this.fillCanvasSpace(gameObject);
+    // renderGameObject(gameObject) {
+    //     this.fillCanvasSpace(gameObject);
+    // }
+
+    renderGameObject(gameObject, size) {
+        var ctx = this.getCanvasElement().getContext('2d');
+        ctx.fillStyle = gameObject.colour;
+        for(let pos of gameObject.position) {
+            ctx.fillRect(pos.x, pos.y, size.width , size.height);
+        }
+       // this.fillCanvasSpace(gameObject);
     }
 
     fillCanvasSpace(objectToRender) {

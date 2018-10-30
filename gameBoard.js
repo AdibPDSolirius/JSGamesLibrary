@@ -23,7 +23,11 @@ export class GameBoard {
     }
 
     getGameObjectPosition(gameOject) {
-        return this.grid.getScreenPosition(gameOject.position);
+        var position = [];
+        for(let curPosition of gameOject.position) {
+            position.push(this.grid.getScreenPosition(curPosition));
+        }
+        return position;
     }
 
     // setPlayerStartingPosition() {

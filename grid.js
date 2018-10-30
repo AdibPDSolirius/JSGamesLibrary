@@ -13,21 +13,21 @@ export class Grid {
     }
 
     calculateBlockSize() {
-        let totalWidthAfterReducingSpacing = this.size.width - (this.blockSpacing*(this.rowByColumn.height - 1))
-        let blockWidth = totalWidthAfterReducingSpacing / this.rowByColumn.height;
+        let totalWidthAfterReducingSpacing = this.size.width - (this.blockSpacing*(this.rowByColumn.column - 1))
+        let blockWidth = totalWidthAfterReducingSpacing / this.rowByColumn.column;
 
-        let totalHeightAfterReducingSpacing = this.size.height - (this.blockSpacing*(this.rowByColumn.width - 1))
-        let blockHeight = totalHeightAfterReducingSpacing / this.rowByColumn.width;
+        let totalHeightAfterReducingSpacing = this.size.height - (this.blockSpacing*(this.rowByColumn.row - 1))
+        let blockHeight = totalHeightAfterReducingSpacing / this.rowByColumn.row;
         return new Size(blockWidth, blockHeight);
     }
 
     createGridOfPositions() {
         let gridArray = [];
         let currrentYPosition = this.position.y;
-        for(let curRow = 0; curRow < this.rowByColumn.width; curRow++) {
+        for(let curRow = 0; curRow < this.rowByColumn.row; curRow++) {
             let currentXPosition = this.position.x;
             let curRowPositions = [];
-            for(let curColumn = 0; curColumn < this.rowByColumn.height; curColumn++) {
+            for(let curColumn = 0; curColumn < this.rowByColumn.column; curColumn++) {
                 curRowPositions.push(new Position(currentXPosition, currrentYPosition));
                 currentXPosition += this.blockSize.width + this.blockSpacing;
             }
@@ -38,16 +38,12 @@ export class Grid {
     }
 
     getGridRowSize() {
-        return this.rowByColumn.width;
+        return this.rowByColumn.row;
     }
 
     getGridColumnSize() {
-        return this.rowByColumn.height;
+        return this.rowByColumn.column;
     }
-
-    // getScreenSize(blockCount) {
-    //     return blockCount * this.sizeOfBlocks;
-    // }
 
     getScreenPosition(gridPosition){
         return this.grid[gridPosition.y][gridPosition.x];
