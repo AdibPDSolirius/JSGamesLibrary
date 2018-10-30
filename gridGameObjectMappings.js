@@ -11,5 +11,11 @@ export class GridGameObjectMappings {
     getMapping(gameObject) {
         return this.mappings[gameObject.name];
     }
+
+    setMapping(gameObject, position) {
+        if(this.mappings[gameObject.name]) {
+            this.mappings[gameObject.name] = position;
+        }
+    }
     
 }

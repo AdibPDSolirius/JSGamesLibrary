@@ -1,10 +1,10 @@
 export class GameListener {
-    constructor(key, motion) {
-        window.onkeydown = function(e) {
+    addKeyDownListener(key, motion) {
+        window.addEventListener('keydown', function(e){
             let keyCode = e.keyCode ? e.keyCode : e.which;
             if(keyCode === key) {
                 motion();
             }
-        }
+        })
     }
 }

@@ -3,8 +3,4 @@ export class GameObject {
         this.name = name;
         this.colour = colour;
     }
-
-    addKeyListener(gameKeyListener) {
-        this.gameKeyListener = gameKeyListener;
-    }
 }

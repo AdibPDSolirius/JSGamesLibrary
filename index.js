@@ -10,7 +10,7 @@ import { GameKeys } from './motion/gameKeys.js';
 //SNAKE EXAMPLE
 //Initialise gameboard
 var gameBoardSize = new Size(1000, 1000);
-var gameBoardRowByColumn = new RowColumn(60, 60);
+var gameBoardRowByColumn = new RowColumn(11, 11);
 var gameBoardPosition = new Position(100, 100);
 var gameBoardColour = 'black';
 var gameBoardBorder = '0px solid';
@@ -18,19 +18,30 @@ var gameBoard = new GameBoard(gameBoardPosition, gameBoardSize, gameBoardRowByCo
 
 //Initialise game objects
 var player = new GameObject('player', 'white');
-player.addKeyListener(new GameListener(GameKeys.RIGHT, function() {
-    console.log('ere');
-    playerPositions.push(new Position(playerPositions[playerPositions.length-1].x - 1, playerPositions[playerPositions.length-1].y - 1));
+var gameListener = new GameListener();
+gameListener.addKeyDownListener(GameKeys.UP, function() {
+    gameBoard.moveGameObjectUp(player);
     gameCanvas.render();
-}));
+});
+gameListener.addKeyDownListener(GameKeys.DOWN, function() {
+    gameBoard.moveGameObjectDown(player);
+    gameCanvas.render();
+});
+
+gameListener.addKeyDownListener(GameKeys.RIGHT, function() {
+    gameBoard.moveGameObjectRight(player);
+    gameCanvas.render();
+});
+
+gameListener.addKeyDownListener(GameKeys.LEFT, function() {
+    gameBoard.moveGameObjectLeft(player);
+    gameCanvas.render();
+});
 
 //Initialise game object positions
-var playerPositions = [
-    new Position(30, 30),
-]
 
 //Add game objects to gameboard with positions
-gameBoard.addGameObject(player, new Position(30, 30));
+gameBoard.addGameObject(player, new Position(0, 10));
 
 //Initialise game canvas with gameboard
 var gameCanvas = new GameCanvas(gameBoard);

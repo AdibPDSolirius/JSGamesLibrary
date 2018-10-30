@@ -21,11 +21,31 @@ export class GameBoard {
     }
 
     getPositionOf(gameOject) {
-        return this.gridGameObjectMapping.getMapping(gameOject);
+        return this.grid.getScreenPosition(this.gridGameObjectMapping.getMapping(gameOject));
     }
 
-    moveGameObjectUp() {
+    moveGameObjectUp(gameObject) {
+        var currentPosition = this.gridGameObjectMapping.getMapping(gameObject);
+        var movedUpPosition = new Position(currentPosition.x, currentPosition.y-1);
+        this.gridGameObjectMapping.setMapping(gameObject, movedUpPosition);
+    }
 
+    moveGameObjectDown(gameObject) {
+        var currentPosition = this.gridGameObjectMapping.getMapping(gameObject);
+        var movedUpPosition = new Position(currentPosition.x, currentPosition.y+1);
+        this.gridGameObjectMapping.setMapping(gameObject, movedUpPosition);
+    }
+
+    moveGameObjectLeft(gameObject) {
+        var currentPosition = this.gridGameObjectMapping.getMapping(gameObject);
+        var movedUpPosition = new Position(currentPosition.x-1, currentPosition.y);
+        this.gridGameObjectMapping.setMapping(gameObject, movedUpPosition);
+    }
+
+    moveGameObjectRight(gameObject) {
+        var currentPosition = this.gridGameObjectMapping.getMapping(gameObject);
+        var movedUpPosition = new Position(currentPosition.x+1, currentPosition.y);
+        this.gridGameObjectMapping.setMapping(gameObject, movedUpPosition);
     }
 
     // setPlayerStartingPosition() {
