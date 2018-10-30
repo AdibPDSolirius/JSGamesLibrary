@@ -45,9 +45,7 @@ export class GameCanvas {
 
     renderGameObjects() {
         for(let curGameObject of this.gameBoard.gameObjects) {
-            for(let curPosition of this.gameBoard.getPositionsOf(curGameObject)) {
-                this.fillCanvasSpace(curPosition, this.gameBoard.grid.blockSize, curGameObject.colour);
-            }
+            this.fillCanvasSpace(this.gameBoard.getPositionOf(curGameObject), this.gameBoard.grid.blockSize, curGameObject.colour);
         }
     }
 

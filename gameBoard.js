@@ -1,6 +1,7 @@
 import { Position } from "./position.js";
 import { Grid } from "./grid.js";
 import { Size } from "./size.js";
+import { GridGameObjectMappings } from "./gridGameObjectMappings.js";
 
 export class GameBoard {
     constructor(position, size, rowByColumn, colour, border) {
@@ -9,22 +10,22 @@ export class GameBoard {
         this.colour = colour;
         this.border = border;
         this.grid = new Grid(position, this.size, rowByColumn, 1);
+        this.gridGameObjectMapping = new GridGameObjectMappings();
         this.gameObjects = [];
     }
 
     addGameObject(gameObject, position) {
-        var obj = gameObject;
-        obj.position = position;
-        this.gameObjects.push(obj);
+        this.gridGameObjectMapping.addMapping(gameObject, position);
+        this.gameObjects.push(gameObject);
         
     }
 
-    getPositionsOf(gameOject) {
-        var positions = [];
-        for(let curPosition of gameOject.position) {
-            positions.push(this.grid.getScreenPosition(curPosition));
-        }
-        return positions;
+    getPositionOf(gameOject) {
+        return this.gridGameObjectMapping.getMapping(gameOject);
+    }
+
+    moveGameObjectUp() {
+
     }
 
     // setPlayerStartingPosition() {

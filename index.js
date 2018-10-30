@@ -4,6 +4,8 @@ import { Position } from './position.js';
 import { Size } from './size.js';
 import { GameBoard } from './gameBoard.js';
 import { RowColumn } from './rowColumn.js';
+import { GameListener } from './motion/gameListeners.js';
+import { GameKeys } from './motion/gameKeys.js';
 
 //SNAKE EXAMPLE
 //Initialise gameboard
@@ -15,24 +17,20 @@ var gameBoardBorder = '0px solid';
 var gameBoard = new GameBoard(gameBoardPosition, gameBoardSize, gameBoardRowByColumn, gameBoardColour, gameBoardBorder);
 
 //Initialise game objects
-var snake = new GameObject('yellow');
-var apple = new GameObject('red');
+var player = new GameObject('player', 'white');
+player.addKeyListener(new GameListener(GameKeys.RIGHT, function() {
+    console.log('ere');
+    playerPositions.push(new Position(playerPositions[playerPositions.length-1].x - 1, playerPositions[playerPositions.length-1].y - 1));
+    gameCanvas.render();
+}));
 
 //Initialise game object positions
-var snakePositions = [
-    new Position(50,50), 
-    new Position(49,50), 
-    new Position(48,50),
-    new Position(47,50), 
-    new Position(46,50),
-]
-var applePositions = [
-    new Position(3, 3)
+var playerPositions = [
+    new Position(30, 30),
 ]
 
 //Add game objects to gameboard with positions
-gameBoard.addGameObject(snake, snakePositions);
-gameBoard.addGameObject(apple, applePositions);
+gameBoard.addGameObject(player, playerPositions);
 
 //Initialise game canvas with gameboard
 var gameCanvas = new GameCanvas(gameBoard);
