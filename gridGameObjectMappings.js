@@ -17,5 +17,15 @@ export class GridGameObjectMappings {
             this.mappings[gameObject.name] = position;
         }
     }
+
+    isPositionOccupied(position){
+        for(let mappingKey in this.mappings){
+            let curPosition = this.mappings[mappingKey];
+            if(curPosition.x === position.x & curPosition.y === position.y){
+                return true;
+            }
+        }
+        return false;
+    }
     
 }

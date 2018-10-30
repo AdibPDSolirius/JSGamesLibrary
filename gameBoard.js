@@ -27,25 +27,33 @@ export class GameBoard {
     moveGameObjectUp(gameObject) {
         var currentPosition = this.gridGameObjectMapping.getMapping(gameObject);
         var movedUpPosition = new Position(currentPosition.x, currentPosition.y-1);
-        this.gridGameObjectMapping.setMapping(gameObject, movedUpPosition);
+        if(!this.gridGameObjectMapping.isPositionOccupied(movedUpPosition)){
+            this.gridGameObjectMapping.setMapping(gameObject, movedUpPosition);
+        }
     }
 
     moveGameObjectDown(gameObject) {
         var currentPosition = this.gridGameObjectMapping.getMapping(gameObject);
-        var movedUpPosition = new Position(currentPosition.x, currentPosition.y+1);
-        this.gridGameObjectMapping.setMapping(gameObject, movedUpPosition);
+        var movedDownPosition = new Position(currentPosition.x, currentPosition.y+1);
+        if(!this.gridGameObjectMapping.isPositionOccupied(movedDownPosition)){
+            this.gridGameObjectMapping.setMapping(gameObject, movedDownPosition);
+        }
     }
 
     moveGameObjectLeft(gameObject) {
         var currentPosition = this.gridGameObjectMapping.getMapping(gameObject);
-        var movedUpPosition = new Position(currentPosition.x-1, currentPosition.y);
-        this.gridGameObjectMapping.setMapping(gameObject, movedUpPosition);
+        var movedLeftPosition = new Position(currentPosition.x-1, currentPosition.y);
+        if(!this.gridGameObjectMapping.isPositionOccupied(movedLeftPosition)){
+            this.gridGameObjectMapping.setMapping(gameObject, movedLeftPosition);
+        }
     }
 
     moveGameObjectRight(gameObject) {
         var currentPosition = this.gridGameObjectMapping.getMapping(gameObject);
-        var movedUpPosition = new Position(currentPosition.x+1, currentPosition.y);
-        this.gridGameObjectMapping.setMapping(gameObject, movedUpPosition);
+        var movedRightPosition = new Position(currentPosition.x+1, currentPosition.y);
+        if(!this.gridGameObjectMapping.isPositionOccupied(movedRightPosition)){
+            this.gridGameObjectMapping.setMapping(gameObject, movedRightPosition);
+        }
     }
 
     // setPlayerStartingPosition() {

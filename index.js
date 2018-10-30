@@ -38,10 +38,11 @@ gameListener.addKeyDownListener(GameKeys.LEFT, function() {
     gameCanvas.render();
 });
 
-//Initialise game object positions
+var notPlayer = new GameObject('Not player', 'green');
 
 //Add game objects to gameboard with positions
 gameBoard.addGameObject(player, new Position(0, 10));
+gameBoard.addGameObject(notPlayer, new Position(5, 5));
 
 //Initialise game canvas with gameboard
 var gameCanvas = new GameCanvas(gameBoard);
